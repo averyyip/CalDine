@@ -1,7 +1,7 @@
 from flask import Flask, Response, request
 from twilio import twiml
 from restaurant_parser import info, filtered_menu
-
+import os
 
 app = Flask(__name__)
 
@@ -37,4 +37,5 @@ def inbound_sms():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = os.environ.get('PORT', 5000)
+    app.run(debug=True, port = port)
