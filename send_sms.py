@@ -5,6 +5,7 @@ import os
 
 app = Flask(__name__)
 
+help_message = 'Text Options:\n Text "restaurant name"(without the quotes) for more information about the service or location.'
 
 @app.route("/")
 def check_app():
@@ -22,6 +23,8 @@ def inbound_sms():
     outbound_message = info()
     if 'info' in inbound_message:
         inbound_message = inbound_message.replace('info','')
+    elif 'help' in inbound_message:
+        response.message(help_message)
     else:
         outbound_message.update(filtered_menu())
     if inbound_message in outbound_message.keys():
@@ -31,7 +34,7 @@ def inbound_sms():
         dc_commands = '\ncrossroads info \nfoothill info \ncafe3 info \nclarkkerr info'
         for key in outbound_message.keys():
             commands += '\n' + key
-        response.message('Invalid command.\nTry :' + commands + dc_commands) #all the available options
+        response.message("Sorry, I don't recognize that location. Reply with one of our commands below for more information.<\n" + commands.title() + dc_commands + '\nText "helpme" for help') #all the available options
     # we return back the mimetype because Twilio needs an XML response
     return Response(str(response), mimetype="application/xml"), 200
 
