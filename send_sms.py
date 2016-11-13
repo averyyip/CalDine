@@ -5,6 +5,25 @@ import os
 
 app = Flask(__name__)
 
+def filter_input(message):
+    comparison = [['calcentral', 'calcentrl', 'clcentral'], 
+    ['qualcomm', 'qualcom', 'qulcomm', ]
+    ['crossroads', 'crossroad', 'crosroads', 'xroads', 'croads', 'croad']
+    ['cafe3', 'cafe three', 'cfe3', 'café3', 'caféthree']
+    ['foothill', 'fothill', 'foothil']
+    ['clarkkerr', 'ck', 'clarkerr', 'ckc', 'clarkkerrcampus']
+    ['bearwalk', 'berwalk', 'burrwalk', 'oskiwalk']
+    ['gbc', 'goldenbearcafe', 'goldenbear']
+    ['ucpd', 'ucpolice', 'police']
+    ]
+
+    if 'info' in message:
+        message = inbound_message.replace('info','')
+
+    for service in comparison:
+        if message in service:
+            return service[0]
+
 help_message = 'Text Options:\n Text "restaurant name"(without the quotes) for the menu(if available).\nText "<restaurant name> info"(without the quotes) for information about the service or location.' 
 
 @app.route("/")
@@ -41,21 +60,3 @@ if __name__ == "__main__":
     port = os.environ.get('PORT', 5000)
     app.run(debug=True, host = '0.0.0.0', port = int(port))
 
-def filter_input(message):
-    comparison = [['calcentral', 'calcentrl', 'clcentral'], 
-    ['qualcomm', 'qualcom', 'qulcomm', ]
-    ['crossroads', 'crossroad', 'crosroads', 'xroads', 'croads', 'croad']
-    ['cafe3', 'cafe three', 'cfe3', 'café3', 'caféthree']
-    ['foothill', 'fothill', 'foothil']
-    ['clarkkerr', 'ck', 'clarkerr', 'ckc', 'clarkkerrcampus']
-    ['bearwalk', 'berwalk', 'burrwalk', 'oskiwalk']
-    ['gbc', 'goldenbearcafe', 'goldenbear']
-    ['ucpd', 'ucpolice', 'police']
-    ]
-
-    if 'info' in message:
-        message = inbound_message.replace('info','')
-
-    for service in comparison:
-        if message in service:
-            return service[0]
