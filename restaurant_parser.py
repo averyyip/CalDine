@@ -42,7 +42,7 @@ def filtered_menu():
 	for restaurant in results.keys():
 		for time in results[restaurant].keys():
 			if results[restaurant][time] != []:
-				filtered_dict[restaurant] += time + '\n' + ', '.join(results[restaurant][time]) + '\n\n'
+				filtered_dict[restaurant] += time + '\n' + '\n'.join(results[restaurant][time]) + '\n\n'
 	return filtered_dict
 
 
