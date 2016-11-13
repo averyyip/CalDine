@@ -23,6 +23,7 @@ def filter_input(message):
     for service in comparison:
         if message in service:
             return service[0]
+    return message
 
 help_message = 'Text Options:\n Text "restaurant name"(without the quotes) for the menu(if available).\nText "<restaurant name> info"(without the quotes) for information about the service or location.' 
 
