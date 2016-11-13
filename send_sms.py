@@ -18,12 +18,10 @@ def inbound_sms():
     response = twiml.Response()
     # we get the SMS message from the request. we could also get the
     # "To" and the "From" phone number as well
-    inbound_message = request.form.get("Body").lower().replace(' ', '')
+    inbound_message = filter_input(request.form.get("Body").lower().replace(' ', ''))
     # we can now use the incoming message text in our Python application
     outbound_message = info()
-    if 'info' in inbound_message:
-        inbound_message = inbound_message.replace('info','')
-    elif 'help' in inbound_message:
+    if 'help' in inbound_message:
         response.message(help_message)
     else:
         outbound_message.update(filtered_menu())
@@ -42,3 +40,22 @@ def inbound_sms():
 if __name__ == "__main__":
     port = os.environ.get('PORT', 5000)
     app.run(debug=True, host = '0.0.0.0', port = int(port))
+
+def filter_input(message):
+    comparison = [['calcentral', 'calcentrl', 'clcentral'], 
+    ['qualcomm', 'qualcom', 'qulcomm', ]
+    ['crossroads', 'crossroad', 'crosroads', 'xroads', 'croads', 'croad']
+    ['cafe3', 'cafe three', 'cfe3', 'café3', 'caféthree']
+    ['foothill', 'fothill', 'foothil']
+    ['clarkkerr', 'ck', 'clarkerr', 'ckc', 'clarkkerrcampus']
+    ['bearwalk', 'berwalk', 'burrwalk', 'oskiwalk']
+    ['gbc', 'goldenbearcafe', 'goldenbear']
+    ['ucpd', 'ucpolice', 'police']
+    ]
+
+    if 'info' in message:
+        message = inbound_message.replace('info','')
+
+    for service in comparison:
+        if message in service:
+            return service[0]
