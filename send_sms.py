@@ -38,10 +38,12 @@ def inbound_sms():
     response = twiml.Response()
     # we get the SMS message from the request. we could also get the
     # "To" and the "From" phone number as well
-    inbound_message = filter_input(request.form.get("Body").lower().replace(' ', ''))
+    inbound_message = request.form.get("Body").lower().replace(' ', '')
     # we can now use the incoming message text in our Python application
     outbound_message = info()
-    if 'help' in inbound_message:
+    if 'info' in inbound_message:
+        inbound_message = filter_input(inbound_message)
+    elif 'help' in inbound_message:
         response.message(help_message)
         return Response(str(response), mimetype="application/xml"), 200
     else:
