@@ -18,7 +18,7 @@ def filter_input(message):
     ]
 
     if 'info' in message:
-        message = inbound_message.replace('info','')
+        message = message.replace('info','')
 
     for service in comparison:
         if message in service:
