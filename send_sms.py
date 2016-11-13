@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def filter_input(message):
     comparison = [['calcentral', 'calcentrl', 'clcentral'], 
-    ['qualcomm', 'qualcom', 'qulcomm', ]
+    ['qualcomm', 'qualcom', 'qulcomm']
     ['crossroads', 'crossroad', 'crosroads', 'xroads', 'croads', 'croad']
     ['cafe3', 'cafe three', 'cfe3', 'café3', 'caféthree']
     ['foothill', 'fothill', 'foothil']
