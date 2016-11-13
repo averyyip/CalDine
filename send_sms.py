@@ -42,6 +42,7 @@ def inbound_sms():
     outbound_message = info()
     if 'help' in inbound_message:
         response.message(help_message)
+        return Response(str(response), mimetype="application/xml"), 200
     else:
         outbound_message.update(filtered_menu())
     if inbound_message in outbound_message.keys():
