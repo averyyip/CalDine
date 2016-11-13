@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-help_message = 'Text Options:\n Text "restaurant name"(without the quotes) for more information about the service or location.'
+help_message = 'Text Options:\n Text "restaurant name"(without the quotes) for the menu(if available).\nText "<restaurant name> info"(without the quotes) for information about the service or location.' 
 
 @app.route("/")
 def check_app():
