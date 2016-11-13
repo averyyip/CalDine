@@ -25,7 +25,7 @@ def filter_input(message):
             return service[0]
     return message
 
-help_message = 'Text Options:\n Text "restaurant name"(without the quotes) for the menu(if available).\nText "<restaurant name> info"(without the quotes) for information about the service or location.' 
+help_message = 'Text Options:\nText "restaurant name" for the menu (if available).\nText "<restaurant name> info" for information about the service or location.' 
 
 @app.route("/")
 def check_app():
